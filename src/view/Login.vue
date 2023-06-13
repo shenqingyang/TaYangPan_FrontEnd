@@ -234,7 +234,6 @@
     register: "/register",
     login: "/login",
     resetPwd: "/resetPwd",
-    qqlogin: "/qqlogin",
   };
   
   // 0:注册 1:登录 2:重置密码
