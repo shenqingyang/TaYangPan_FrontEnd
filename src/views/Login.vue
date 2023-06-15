@@ -1,6 +1,5 @@
 <template>
     <div class="login-body">
-      <div class="bg"></div>
       <div class="login-panel">
         <el-form
           class="login-register"
@@ -61,17 +60,6 @@
                   >获取验证码</el-button
                 >
               </div>
-              <el-popover placement="left" :width="300" trigger="hover">
-                <div>
-                  <p>1、在垃圾箱中查找邮箱验证码</p>
-                  <p>2、在邮箱中头像->设置->反垃圾->白名单->设置邮件地址白名单</p>
-                </div>
-                <template #reference>
-                  <span class="a-link" :style="{ 'font-size': '14px' ,'height':'18px'}"
-                    >未收到邮箱验证码？</span
-                  >
-                </template>
-              </el-popover>
             </el-form-item>
             <el-form-item prop="nickName" v-if="opType == 0">
               <el-input
