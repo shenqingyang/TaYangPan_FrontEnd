@@ -13,4 +13,5 @@ const config = reactive({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>
