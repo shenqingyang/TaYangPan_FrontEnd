@@ -8,7 +8,36 @@
         </div>
       </div>
       <div class="menu-list">
-        <template v-for="item in menus">
+        <el-menu>
+          <template v-for="(item, index) in menus">
+            <template v-if="item.children != null">
+              <SubMenu
+                v-if="item.allShow || (!item.allShow && userInfo.isAdmin)"
+                :parent-index="index"
+                :item="item"
+                @jump="jump"
+              />
+            </template>
+            <template v-else>
+              <el-menu-item
+                v-if="item.allShow || (!item.allShow && userInfo.isAdmin)"
+                @click="jump(item)"
+                :class="'menu-item'"
+                :index="index"
+              >
+                <template class="menu-item-style" #title>
+                  <el-icon
+                    ><div :class="['iconfont', 'icon-' + item.icon]"></div
+                  ></el-icon>
+                  <div class="text">
+                    {{ item.name }}
+                  </div>
+                </template>
+              </el-menu-item>
+            </template>
+          </template>
+        </el-menu>
+        <!-- <template v-for="item in menus">
           <div
             v-if="item.allShow || (!item.allShow && userInfo.isAdmin)"
             @click="jump(item)"
@@ -24,9 +53,9 @@
               </div>
             </div>
           </div>
-        </template>
+        </template> -->
       </div>
-      <div class="menu-sub-list">
+      <!-- <div class="menu-sub-list">
         <div
           @click="jump(sub)"
           :class="['menu-item-sub', currentPath == sub.path ? 'active' : '']"
@@ -62,7 +91,7 @@
           </div>
           <div class="iconfont icon-refresh" @click="getUseSpace"></div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="body">
@@ -197,6 +226,7 @@
 import UpdateAvatar from "./UpdateAvatar.vue";
 import UpdatePassword from "./UpdatePassword.vue";
 import Uploader from "@/views/main/Uploader.vue";
+import SubMenu from "@/components/SubMenu.vue";
 import {
   ref,
   reactive,
@@ -294,26 +324,13 @@ const menus = [
     name: "我的分享",
     menuCode: "share",
     allShow: true,
-    children: [
-      {
-        name: "分享记录",
-        path: "/myshare",
-      },
-    ],
   },
   {
     path: "/recycle",
     icon: "del",
     name: "回收站",
     menuCode: "recycle",
-    tips: "回收站为你保存10天内删除的文件",
     allShow: true,
-    children: [
-      {
-        name: "删除的文件",
-        path: "/recycle",
-      },
-    ],
   },
   {
     path: "/settings/fileList",
