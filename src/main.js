@@ -2,6 +2,9 @@ import { createApp } from 'vue'
 
 import App from '@/App.vue'
 import router from '@/router'
+//暗黑模式
+import 'element-plus/theme-chalk/dark/css-vars.css'
+import './styles/dark/css-vars.css'
 //引入cookies
 import VueCookies from 'vue-cookies'
 //引入element plus
